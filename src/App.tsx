@@ -1,9 +1,11 @@
-import React from 'react'
+import React from 'react';
+import {Routes, Route} from 'react-router-dom';
+import Layout from './components/layout';
 
 export default function App() {
   return (
-    <div>
-      <h1 className='text-4xl text-red-500'>Home</h1>
-    </div>
+    <Layout>
+      <h1>Home page</h1>
+    </Layout>
   )
 }
