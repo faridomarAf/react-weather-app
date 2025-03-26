@@ -5,7 +5,7 @@ import Layout from './components/layout';
 export default function App() {
   return (
     <Layout>
-      <h1>Home page</h1>
+      <h1 className='text-4xl bggre'>Home</h1>
     </Layout>
   )
 }
