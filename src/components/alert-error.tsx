@@ -7,15 +7,16 @@ interface AlertErrorProps {
     locationError: string | null,
     onClick: ()=> void,
     coordinates: Coordinates | null;
+    errorMessage: string
 }
 
-export default function AlertError({locationError, onClick, coordinates}: AlertErrorProps) {
+export default function AlertError({locationError, onClick, coordinates, errorMessage}: AlertErrorProps) {
     
     if(locationError){
         return (
             <Alert variant={'destructive'}>
                 <AlertTriangle className="h-4 w-4"/>
-                <AlertTitle>Error</AlertTitle>
+                <AlertTitle>{errorMessage}</AlertTitle>
                 <AlertDescription className="flex flex-col gap-4">
                     <p>{locationError}</p>
                     <Button onClick={onClick} variant={'outline'} className="w-fit">
