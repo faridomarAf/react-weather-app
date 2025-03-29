@@ -58,4 +58,10 @@ export interface GeocodingResponse {
     lon: number;
     country: string;
     state?: string
-}
+};
+
+export interface GeolocationState {
+    coordinates: Coordinates | null;
+    error: string | null;
+    isLoading: boolean;
+};
