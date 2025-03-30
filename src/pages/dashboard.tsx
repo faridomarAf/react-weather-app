@@ -4,6 +4,7 @@ import useGeolocation from '../hooks/user-geolocation';
 import WeatherSkeleton from '../components/loading-skeleton';
 import AlertError from '../components/alert-error';
 import { useForecastQuery, useReverseGeocodeQuery, useWeatherQuery } from '../hooks/use-weather';
+import CurrentWeather from '../components/current-weather';
 
 export default function Dashboard() {
     const {coordinates, error: locationError, isLoading:locationIsLoading, getLocation} = useGeolocation();
@@ -11,6 +12,8 @@ export default function Dashboard() {
     const weatherQuery = useWeatherQuery(coordinates);
     const forecastQuery = useForecastQuery(coordinates);
     const locationQuery = useReverseGeocodeQuery(coordinates);
+    
+    console.log(weatherQuery.data);
     
 
     const handleRefresh = ()=>{
@@ -22,7 +25,7 @@ export default function Dashboard() {
         } 
     };
 
-    if(locationIsLoading){
+    if(locationIsLoading || weatherQuery.data === undefined){
         return <WeatherSkeleton/>
     }
 
@@ -64,7 +67,11 @@ export default function Dashboard() {
                 </Button>
             </div>
             {/* Current and hourly weather */}
-
+            <div className='grid gap-6'>
+                <div>
+                    <CurrentWeather data={weatherQuery.data} locationName={locationName}/>
+                </div>
+            </div>
         </div>
     )
 }
