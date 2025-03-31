@@ -6,6 +6,7 @@ import AlertError from '../components/alert-error';
 import { useForecastQuery, useReverseGeocodeQuery, useWeatherQuery } from '../hooks/use-weather';
 import CurrentWeather from '../components/current-weather';
 import HourlyTemperature from '../components/hourly-temperature';
+import WeatherDetails from '../components/weather-details';
 
 export default function Dashboard() {
     const {coordinates, error: locationError, isLoading:locationIsLoading, getLocation} = useGeolocation();
@@ -76,6 +77,7 @@ export default function Dashboard() {
                 </div>
                 <div>
                     {/* details */}
+                    <WeatherDetails data={weatherQuery.data}/>
                     {/* forecast */}
                 </div>
             </div>
