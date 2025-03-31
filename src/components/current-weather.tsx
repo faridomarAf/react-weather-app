@@ -1,10 +1,10 @@
 import { ArrowDown, ArrowUp, Droplets, Wind } from "lucide-react";
-import { GeocodingResponse, WeatherData } from "../types/types"
+import type { GeocodingResponse, WeatherData } from "../types/types"
 import { Card, CardContent} from "./ui/card";
 
 
 interface CurrentWeatherProps {
-    data: WeatherData | null | undefined;
+    data: WeatherData;
     locationName?: GeocodingResponse;
 }
 
@@ -61,7 +61,7 @@ export default function CurrentWeather({ data, locationName }: CurrentWeatherPro
                                 <Wind className="h-4 w-4 text-blue-500"/>
                                 <div className="space-y-0.5">
                                     <p className="text-sm font-medium">Wind speed</p>
-                                    <p className="text-sm text-muted-foreground">{speed}%</p>
+                                    <p className="text-sm text-muted-foreground">{speed} m/s</p>
                                 </div>
                             </div>
                         </div>

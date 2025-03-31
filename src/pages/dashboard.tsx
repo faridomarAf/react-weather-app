@@ -49,9 +49,10 @@ export default function Dashboard() {
         />
     }
 
-    if(weatherQuery.error || forecastQuery.error){
+    if(weatherQuery.error || forecastQuery.error || !weatherQuery.data){
         return <WeatherSkeleton/>
     }
+
 
     return (
         <div className='space-y-4'>
