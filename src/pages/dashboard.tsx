@@ -7,6 +7,7 @@ import { useForecastQuery, useReverseGeocodeQuery, useWeatherQuery } from '../ho
 import CurrentWeather from '../components/current-weather';
 import HourlyTemperature from '../components/hourly-temperature';
 import WeatherDetails from '../components/weather-details';
+import WeatherForecast from '../components/weather-forecast';
 
 export default function Dashboard() {
     const {coordinates, error: locationError, isLoading:locationIsLoading, getLocation} = useGeolocation();
@@ -75,10 +76,9 @@ export default function Dashboard() {
                     <CurrentWeather data={weatherQuery.data} locationName={locationName}/>
                     <HourlyTemperature data={forecastQuery.data}/>
                 </div>
-                <div>
-                    {/* details */}
+                <div className='grid gap-6 md:grid-cols-2 items-start'>
                     <WeatherDetails data={weatherQuery.data}/>
-                    {/* forecast */}
+                    <WeatherForecast data={forecastQuery.data}/>
                 </div>
             </div>
         </div>

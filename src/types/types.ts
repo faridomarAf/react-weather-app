@@ -65,3 +65,17 @@ export interface GeolocationState {
     error: string | null;
     isLoading: boolean;
 };
+
+export interface DailyForecast {
+    date: number;
+    temp_min: number;
+    temp_max: number;
+    humidity: number;
+    wind: number;
+    weather: {
+        id: number;
+        main: string;
+        description: string;
+        icon: string;
+    };
+}
