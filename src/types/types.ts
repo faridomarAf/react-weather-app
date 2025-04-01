@@ -100,3 +100,11 @@ export interface FavoriteCities {
     state?: string;
     addedAt: number;
 };
+
+export interface FavoritecityTabletProps {
+    id:string;
+    name: string;
+    lat:number;
+    lon: number;
+    onRemove: (id: string)=> void;
+}

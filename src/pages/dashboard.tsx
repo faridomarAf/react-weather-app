@@ -8,6 +8,7 @@ import CurrentWeather from '../components/current-weather';
 import HourlyTemperature from '../components/hourly-temperature';
 import WeatherDetails from '../components/weather-details';
 import WeatherForecast from '../components/weather-forecast';
+import FavoriteCities from '../components/favorite-cities';
 
 export default function Dashboard() {
     const {coordinates, error: locationError, isLoading:locationIsLoading, getLocation} = useGeolocation();
@@ -64,7 +65,7 @@ export default function Dashboard() {
 
     return (
         <div className='space-y-4'>
-            {/* Favorite cities */}
+            <FavoriteCities/>
             <div className='flex items-center justify-between'>
                 <h1 className='text-xl font-bold  tracking-tight'>My location</h1>
                 <Button 
