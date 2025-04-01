@@ -28,16 +28,30 @@ export default function Dashboard() {
         } 
     };
 
-    if(locationIsLoading || weatherQuery.data === undefined){
+    if(locationIsLoading){
         return <WeatherSkeleton/>
     }
 
     if(locationError){
         return <AlertError 
-        locationError={locationError} 
+        errorMessage={locationError} 
         onClick={getLocation} 
-        coordinates={coordinates}
-        errorMessage='Error'
+        title='Location Error'
+        useForLocationError= {true}
+        />
+    }
+
+    if(locationError){
+        console.log(locationError);
+    }
+    
+
+    if(!coordinates){
+        return <AlertError 
+        errorMessage='Please enable location access to see your local weather'
+        onClick={getLocation} 
+        title='Location Required'
+        useForCoordinates = {true}
         />
     }
 
@@ -45,14 +59,13 @@ export default function Dashboard() {
 
     if(weatherQuery.error || forecastQuery.error){
         return <AlertError
-        locationError={'Failed to fetch weather data. Please try again'} 
+        errorMessage='Failed to fetch weather data. Please try again' 
         onClick={handleRefresh} 
-        coordinates={coordinates}
-        errorMessage='Error'
+        title='Error'
         />
     }
 
-    if(weatherQuery.error || forecastQuery.error || !weatherQuery.data || !forecastQuery.data){
+    if(!weatherQuery.data || !forecastQuery.data){
         return <WeatherSkeleton/>
     }
 
