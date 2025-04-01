@@ -1,5 +1,11 @@
 import { useParams, useSearchParams } from 'react-router-dom'
 import { useForecastQuery, useWeatherQuery } from '../hooks/use-weather';
+import AlertError from '../components/alert-error';
+import WeatherSkeleton from '../components/loading-skeleton';
+import CurrentWeather from '../components/current-weather';
+import HourlyTemperature from '../components/hourly-temperature';
+import WeatherDetails from '../components/weather-details';
+import WeatherForecast from '../components/weather-forecast';
 
 export default function City() {
     const [searchParams] = useSearchParams();
@@ -13,8 +19,33 @@ export default function City() {
     const weatherQuery = useWeatherQuery(coordinates);
     const forecastQuery = useForecastQuery(coordinates);
 
+    if(weatherQuery.error || forecastQuery.error){
+        return <AlertError
+        errorMessage='Failed to fetch weather data. Please try again' 
+        title='Error'
+        />
+    }
+
+    if(!weatherQuery.data || !forecastQuery.data || !params.cityName){
+        return <WeatherSkeleton/>
+    }
 
     return (
-        <div>City</div>
+        <div className='space-y-4'>
+            <div className='flex items-center justify-between'>
+                <h1 className='text-3xl font-bold tracking-tight'>{params.cityName},{weatherQuery.data.sys.country}</h1>
+                {/* favorite button */}
+            </div>
+            <div className='grid gap-6'>
+                <div className='flex flex-col gap-4'>
+                    <CurrentWeather data={weatherQuery.data}/>
+                    <HourlyTemperature data={forecastQuery.data}/>
+                </div>
+                <div className='grid gap-6 md:grid-cols-2 items-start'>
+                    <WeatherDetails data={weatherQuery.data}/>
+                    <WeatherForecast data={forecastQuery.data}/>
+                </div>
+            </div>
+        </div>
     )
 }

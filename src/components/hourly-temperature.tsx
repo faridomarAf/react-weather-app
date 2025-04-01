@@ -8,8 +8,6 @@ interface HourlyTemperatureProps {
 }
 
 export default function HourlyTemperature({data}: HourlyTemperatureProps) {
-    console.log(data);
-    
 
     const chartData= data.list
         .slice(0, 8) // Get next 24 hours (3-hour intervals)

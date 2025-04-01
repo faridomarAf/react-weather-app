@@ -16,9 +16,6 @@ export default function Dashboard() {
     const forecastQuery = useForecastQuery(coordinates);
     const locationQuery = useReverseGeocodeQuery(coordinates);
     
-    console.log(weatherQuery.data);
-    
-
     const handleRefresh = ()=>{
         getLocation();
         if(coordinates){
@@ -40,11 +37,6 @@ export default function Dashboard() {
         useForLocationError= {true}
         />
     }
-
-    if(locationError){
-        console.log(locationError);
-    }
-    
 
     if(!coordinates){
         return <AlertError 

@@ -3,7 +3,7 @@ import { Alert, AlertDescription, AlertTitle } from "./ui/alert";
 import { Button } from "./ui/button";
 
 interface AlertErrorProps {
-    onClick: ()=> void,
+    onClick?: ()=> void,
     title: string;
     errorMessage: string;
     useForLocationError?: boolean;
@@ -20,8 +20,9 @@ export default function AlertError({onClick, title, errorMessage,useForLocationE
             <AlertDescription className="flex flex-col gap-4">
                 <p>{errorMessage}</p>
                 <Button onClick={onClick} variant={'outline'} className="w-fit">
-                    {useForCoordinates || useForLocationError &&<MapPin className="mr-2 w-4 h-4"/>}
-                    <RefreshCw className="mr-2 h-4 w-4" />
+                    {useForCoordinates || useForLocationError ? (<MapPin className="mr-2 w-4 h-4"/>) :
+                    (<RefreshCw className="mr-2 h-4 w-4" />)
+                    }
                     {useForCoordinates || useForLocationError ? 'Enable location': 'Retry'}
                 </Button>
             </AlertDescription>
