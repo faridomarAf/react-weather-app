@@ -6,6 +6,7 @@ import CurrentWeather from '../components/current-weather';
 import HourlyTemperature from '../components/hourly-temperature';
 import WeatherDetails from '../components/weather-details';
 import WeatherForecast from '../components/weather-forecast';
+import FavoriteButton from '../components/favorite-button';
 
 export default function City() {
     const [searchParams] = useSearchParams();
@@ -34,7 +35,7 @@ export default function City() {
         <div className='space-y-4'>
             <div className='flex items-center justify-between'>
                 <h1 className='text-3xl font-bold tracking-tight'>{params.cityName},{weatherQuery.data.sys.country}</h1>
-                {/* favorite button */}
+                <FavoriteButton data={{...weatherQuery.data, name: params.cityName}}/>
             </div>
             <div className='grid gap-6'>
                 <div className='flex flex-col gap-4'>

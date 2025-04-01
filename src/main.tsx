@@ -6,6 +6,7 @@ import {BrowserRouter} from 'react-router-dom';
 import { ThemeProvider } from './context/theme-provider.tsx';
 import {QueryClientProvider, QueryClient} from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+import { Toaster } from 'sonner';
 
 const queryClient = new QueryClient({
   defaultOptions:{
@@ -24,6 +25,7 @@ createRoot(document.getElementById('root')!).render(
       <BrowserRouter>
         <ThemeProvider defaultTheme='light'>
           <App/>
+          <Toaster richColors/>
         </ThemeProvider>
       </BrowserRouter>
       <ReactQueryDevtools initialIsOpen={false}/>
