@@ -2,15 +2,17 @@ import  { useState } from 'react'
 import { Button } from './ui/button'
 import { CommandDialog, CommandGroup, CommandInput, CommandItem, CommandList, CommandSeparator } from './ui/command'
 import { CommandEmpty } from 'cmdk'
-import { Clock, Loader, Search, XCircle } from 'lucide-react';
+import { Clock, Loader, Search, Star, XCircle } from 'lucide-react';
 import { useLocationSearch } from '../hooks/use-weather';
 import { useNavigate } from 'react-router-dom';
 import { useSearchHistory } from '../hooks/use-search-history';
 import { format } from 'date-fns';
+import { useFavorite } from '../hooks/use-favorite';
 
 export default function CitySearch() {
     const [open, setOpen] = useState(false);
     const [query, setQuery] = useState("");
+    const {favorites} = useFavorite();
 
     const navigate = useNavigate();
 
@@ -56,10 +58,33 @@ export default function CitySearch() {
                     <CommandItem>Calender</CommandItem>
                 </CommandGroup>
 
+                {favorites.length > 0 && (
+                    <CommandGroup heading='Favorites'>
+                        {favorites.map((location)=>{
+                            return <CommandItem 
+                            key={location.id}
+                            value={`${location.lat} | ${location.lon} | ${location.name} | ${location.country}`}
+                            onSelect={handleSelect}
+                            >
+                                <Star className='mr-2 w-4 h-4 text-yellow-500'/>
+                                <span>{location.name}</span>
+                                {location.state && (
+                                    <span className='text-sm text-muted-foreground'>
+                                        , {location.state}
+                                    </span>
+                                )}
+                                <span className='text-sm text-muted-foreground'>
+                                    , {location.country}
+                                </span>
+                            </CommandItem>
+                        })}
+                    </CommandGroup>
+                )}
+
                 {history.length > 0 && (
                     <>
                     <CommandSeparator/>
-                    <CommandGroup heading='Recent searches'>
+                    <CommandGroup>
                         <div className='flex items-center justify-between px-2 my-2'>
                             <p className='text-xs text-muted-foreground'>Recent searches</p>
                             <Button

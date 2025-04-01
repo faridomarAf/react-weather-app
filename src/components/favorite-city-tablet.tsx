@@ -4,7 +4,6 @@ import { useWeatherQuery } from "../hooks/use-weather";
 import { Button } from "./ui/button";
 import { Loader2, XIcon } from "lucide-react";
 import { toast } from "sonner";
-import CurrentWeather from "./current-weather";
 
 
 export default function FavoritecityTablet({id, lat, lon, name, onRemove}: FavoritecityTabletProps) {
