@@ -1,54 +1,126 @@
-# React + TypeScript + Vite
+# Weather Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Overview
+This is a multi-page weather application that allows users to view the weather of their favorite locations, including:
+- **Dashboard**: Displays favorite locations, current-location temperature, and forecast.
+- **Cities Page**: Shows weather details for a selected city.
+- **Routing**: Implemented using `react-router-dom`.
+- **UI Components**: Built with `shadcn/ui`.
 
-Currently, two official plugins are available:
+## Tech Stack
+- **React.js**
+- **TypeScript**
+- **Tailwind CSS**
+- **shadcn/ui**
+- **TanStack Query** for state management
+- **Recharts** for data visualization
+- **OpenWeather API** for fetching weather data
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Installation
+1. **Install dependencies**:
+   ```sh
+   npm install
+   ```
+2. **Setup Tailwind CSS**:
+   ```sh
+   npm install -D tailwindcss postcss autoprefixer
+   npx tailwindcss init -p
+   ```
+3. **Install shadcn/ui**:
+   ```sh
+   npx shadcn@latest add button alert card command scroll-area skeleton sonner
+   ```
+4. **Install TanStack Query**:
+   ```sh
+   npm install @tanstack/react-query @tanstack/react-query-devtools
+   ```
+5. **Install additional dependencies**:
+   ```sh
+   npm install recharts date-fns
+   ```
+6. **Setup OpenWeather API**:
+   - Sign up at [OpenWeather](https://openweathermap.org/)
+   - Generate an API key
+   - Add it to `.env` file:
+     ```sh
+     REACT_APP_WEATHER_API_KEY=your_api_key_here
+     ```
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## Project Structure
+```
+weather-app/
+├── src/
+│   ├── api/           # API configurations
+│   ├── components/    # UI components
+│   ├── hooks/         # Custom hooks
+│   ├── pages/         # Page components
+│   ├── styles/        # Styles and themes
+│   ├── App.tsx        # Main application
+│   ├── main.tsx       # Entry point
+│   ├── config.ts      # App configurations
+│   ├── routes.tsx     # Application routing
+│   ├── index.css      # Global styles
+│   └── types/         # TypeScript types
+├── public/
+│   ├── assets/        # Static assets
+│   ├── favicon.ico    # Favicon
+│   ├── index.html     # Main HTML template
+├── .env               # Environment variables
+├── package.json       # Dependencies and scripts
+├── tailwind.config.js # Tailwind configuration
+└── README.md          # Project documentation
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Features
+### 1. **Layout Setup**
+- Created a global layout with a header and footer.
+- Implemented dark mode support.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### 2. **State Management with TanStack Query**
+- Configured `QueryClientProvider` for managing API calls.
+- Added `ReactQueryDevtools` for debugging.
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+### 3. **Weather Data Fetching**
+- Utilizes OpenWeather API for current weather and forecasts.
+- Implements Geocoding API for location-based weather retrieval.
+
+### 4. **Fetching Current Location Weather**
+- Implemented a custom hook `use-geolocation.tsx`.
+- Displays real-time weather updates in the dashboard.
+
+### 5. **Fetching City Weather Data**
+- Created `use-weather.ts` custom hook.
+- Retrieves weather data using latitude and longitude.
+
+### 6. **Weather Data Visualization**
+- Integrated `Recharts` for graphical representation of weather trends.
+- Uses `date-fns` for date formatting.
+
+### 7. **City Search and Navigation**
+- Implemented search functionality in the navbar.
+- Fetches city coordinates using OpenWeather’s Geocoding API.
+- Redirects to the city-specific page upon selection.
+
+### 8. **Favorites Feature**
+- Allows users to mark favorite cities.
+- Custom hook `use-favorite.ts` handles favorite locations.
+- Displays favorite cities in the dashboard.
+- Shows favorite cities as search suggestions.
+
+## Running the Application
+To start the development server, run:
+```sh
+npm run dev
 ```
+To build for production:
+```sh
+npm run build
+```
+To preview the production build:
+```sh
+npm run preview
+```
+
+## License
+This project is licensed under the MIT License.
+
